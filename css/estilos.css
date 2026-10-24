@@ -1,0 +1,237 @@
+:root {
+  --color-principal: #37386f;
+  --color-secundario: #f4e7d3da;
+  --color-texto: #2d241fd5;
+  --color-acento: #ff5622d5;
+  --color-oferta: #2e8b57;
+  --color-logo: #09121c;
+  --espacio-base: 1rem;
+  --radio-tarjeta: 16px;
+  --duracion: 0.3s;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  color: var(--color-texto);
+  background-color: var(--color-secundario);
+}
+
+header,
+footer {
+  padding: 2rem;
+  color: white;
+  text-align: center;
+  background-color: var(--color-principal);
+}
+
+h1 {
+  margin-top: 0;
+  color: var(--color-secundario);
+  animation: bajar 0.8s ease-out;
+}
+
+main {
+  padding: 2rem;
+  text-align: center;
+}
+
+.logo {
+  display: block;
+  width: 100%;
+  max-height: 400px;
+  object-fit: contain;
+  background-color: var(--color-logo);
+  animation: desvanecer 1.2s ease-in;
+  margin-bottom: 1rem;
+}
+
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+
+a {
+  background-color: var(--color-acento);
+  color: white;
+  padding: 10px 50px;
+  border-radius: 5px;
+  display: inline-block;
+  text-decoration: none;
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  transition:
+    background-color var(--duracion) ease,
+    transform var(--duracion) ease;
+}
+
+a:hover {
+  background-color: #e45a30cb;
+  transform: scale(1.05);
+}
+
+.contenedor {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  padding: 2rem 0;
+}
+
+.tarjeta {
+  width: 400px;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: var(--espacio-base);
+  border-radius: var(--radio-tarjeta);
+  background-color: white;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.521);
+  border: 1px solid #ccc;
+  text-align: left;
+  animation: aparecer 0.8s ease-out;
+  transition: transform var(--duracion) ease;
+}
+
+.tarjeta:hover {
+  transform: translateY(-8px);
+}
+
+.tarjeta img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+}
+
+.contenedor > section {
+  display: flex;
+}
+
+section .tarjeta {
+  display: flex;
+  flex-direction: column;
+}
+
+section .tarjeta img {
+  margin-top: auto;
+}
+
+section .tarjeta a {
+  align-self: flex-start;
+  margin-top: 1rem;
+}
+
+.precio-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.precio {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--color-principal);
+}
+
+.precio-old {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--color-principal);
+  text-decoration: line-through;
+}
+
+.precio-label {
+  font-size: 1rem;
+  font-weight: bold;
+  color: var(--color-principal);
+}
+
+.descuento,
+.sin-descuento {
+  display: inline-block;
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  font-weight: bold;
+}
+
+.descuento {
+  color: white;
+  background-color: var(--color-oferta);
+  animation: latido 1.5s ease-in-out infinite;
+}
+
+header {
+  padding: 0 0 2rem;
+}
+
+.sin-descuento {
+  color: #666;
+  background-color: #eee;
+}
+
+@keyframes aparecer {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bajar {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes desvanecer {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes latido {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+@media (max-width: 768px) {
+  footer,
+  main {
+    padding: 1rem;
+  }
+
+  header {
+    padding: 0 0 1rem;
+  }
+
+  nav {
+    flex-direction: column;
+  }
+
+  a {
+    padding: 10px 20px;
+    font-size: 1rem;
+  }
+}

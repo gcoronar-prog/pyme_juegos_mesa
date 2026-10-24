@@ -1,56 +1,63 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Calabozos Alcaloides</title>
-    <link rel="stylesheet" href="estilos.css" />
+    <link rel="stylesheet" href="css/estilos.css" />
   </head>
   <body>
     <header>
+      <img
+        class="logo"
+        src="img/escudo-logo2.jpg"
+        alt="Calabozos Alcaloides logo"
+      />
       <h1>Calabozos Alcaloides</h1>
       <nav>
         <a href="index.html">Inicio</a>
-        <a href="tcg.html">Juegos de cartas</a>
-        <a href="juegos_rol.html">Juegos de rol</a>
-        <a href="wargames.html">Wargames y estrategia</a>
-        <a href="accesorios.html">Accesorios</a>
+        <a href="categorias/tcg.html">Juegos de cartas</a>
+        <a href="categorias/juegos_rol.html">Juegos de rol</a>
+        <a href="categorias/wargames.html">Wargames y estrategia</a>
+        <a href="categorias/accesorios.html">Accesorios</a>
       </nav>
     </header>
     <main>
+      <h2>Categorias</h2>
       <div class="contenedor">
         <section id="tcg">
           <article class="tarjeta">
             <h2>Juegos de cartas</h2>
             <img src="img/tcg.jpg" alt="Juegos de cartas" />
-            <button href="tcg.html">Ver más</button>
+            <a href="./categorias/tcg.html">Ver más</a>
           </article>
         </section>
         <section id="rol">
           <article class="tarjeta">
             <h2>Juegos de rol</h2>
             <img src="img/rol.jpg" alt="Juegos de rol" />
-            <button href="juegos_rol.html">Ver más</button>
+            <a href="./categorias/juegos_rol.html">Ver más</a>
           </article>
         </section>
         <section id="wargames">
           <article class="tarjeta">
             <h2>Wargames y estrategia</h2>
             <img src="img/wargames.jpg" alt="Wargames y estrategia" />
-            <button href="wargames.html">Ver más</button>
+            <a href="./categorias/wargames.html">Ver más</a>
           </article>
         </section>
         <section id="otros">
           <article class="tarjeta">
             <h2>Accesorios</h2>
             <img src="img/accesorios.jpg" alt="Accesorios" />
-            <button href="accesorios.html">Ver más</button>
+            <a href="./categorias/accesorios.html">Ver más</a>
           </article>
         </section>
       </div>
     </main>
+    <footer>
+      <p>Derechos de autor © 2026 Calabozos Alcaloides Inc.</p>
+      <p>Ubicados en Calle Falsa 123.</p>
+    </footer>
   </body>
-  <footer>
-    <p>Derechos de autor © 2026 Calabozos Alcaloides Inc.</p>
-  </footer>
 </html>
