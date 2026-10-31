@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
+    <title>Calabozos Alcaloides</title>
+    <link rel="stylesheet" href="../css/estilos.css" />
+    <script src="../js/validacion.js" defer></script>
+  </head>
+  <body>
+    <header>
+      <img
+        class="logo"
+        src="../img/escudo-logo2.jpg"
+        alt="Calabozos Alcaloides logo"
+      />
+      <h1>Calabozos Alcaloides</h1>
+      <nav>
+        <a href="../index.html">Inicio</a>
+        <a href="../categorias/tcg.html">Juegos de cartas</a>
+        <a href="../categorias/juegos_rol.html">Juegos de rol</a>
+        <a href="../categorias/wargames.html">Wargames y estrategia</a>
+        <a href="../categorias/accesorios.html">Accesorios</a>
+      </nav>
+    </header>
+    <main
+      id="mainRegistro"
+      class="container border border-dark rounded p-4 my-4"
+    >
+      <h3>Ingrese sus datos para registrarse</h3>
+
+      <p id="mensaje" aria-live="polite"></p>
+      <form
+        id="formRegistro"
+        class="row g-3 text-start needs-validation"
+        novalidate
+      >
+        <div class="col-12 col-md-6">
+          <label for="nombre" class="form-label">Nombres</label>
+          <input id="nombre" type="text" class="form-control" required />
+          <div id="errorNombre" class="invalid-feedback"></div>
+        </div>
+        <div class="col-12 col-md-6">
+          <label for="apellido" class="form-label">Apellidos</label>
+          <input id="apellido" type="text" class="form-control" required />
+          <div id="errorApellido" class="invalid-feedback">
+            Escribe un apellido válido.
+          </div>
+        </div>
+        <div class="col-12 col-md-6">
+          <label for="fechaNacimiento" class="form-label"
+            >Fecha de nacimiento</label
+          >
+          <input
+            id="fechaNacimiento"
+            type="date"
+            class="form-control"
+            required
+          />
+          <div id="errorFecha" class="invalid-feedback"></div>
+        </div>
+        <div class="col-12 col-md-6">
+          <label for="username" class="form-label">Nombre de usuario</label>
+          <input id="username" type="text" class="form-control" required />
+          <div class="invalid-feedback">Campo requerido</div>
+        </div>
+        <div class="col-12">
+          <label for="mail" class="form-label">Correo electronico</label>
+          <input id="mail" type="email" class="form-control" required />
+          <div id="errorCorreo" class="invalid-feedback"></div>
+        </div>
+        <div class="col-12 col-md-6">
+          <label for="userPassword" class="form-label">Contraseña</label>
+          <input
+            id="userPassword"
+            type="password"
+            class="form-control"
+            required
+          />
+          <div id="errorPassword" class="invalid-feedback"></div>
+        </div>
+        <div class="col-12 col-md-6">
+          <label for="repeatPass" class="form-label">Repetir contraseña</label>
+          <input
+            id="repeatPass"
+            type="password"
+            class="form-control"
+            required
+          />
+          <div id="errorPassRep" class="invalid-feedback"></div>
+        </div>
+        <div class="col-12 col-md-12">
+          <label for="direccion" class="form-label"
+            >Dirección de despacho</label
+          >
+          <input id="direccion" type="text" class="form-control" />
+        </div>
+        <div class="col-12 d-flex gap-2 justify-content-end">
+          <button type="reset" class="btn btn-outline-secondary">
+            Limpiar
+          </button>
+          <button id="registrotbtn" type="submit" class="btn btn-primary">
+            Registrar
+          </button>
+        </div>
+      </form>
+    </main>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

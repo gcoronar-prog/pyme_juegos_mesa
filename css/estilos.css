@@ -175,6 +175,10 @@ header {
   background-color: #eee;
 }
 
+#mainRegistro {
+  max-width: 720px;
+}
+
 @keyframes aparecer {
   from {
     opacity: 0;
