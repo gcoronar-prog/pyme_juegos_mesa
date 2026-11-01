@@ -1,16 +1,26 @@
 const formu = document.getElementById("formRegistro");
-const errorCorreo = document.getElementById("errorCorreo");
+const alerta = document.getElementById("alertaFormu");
+const alertaTexto = document.getElementById("alertaTexto");
+
 const correo = document.getElementById("mail");
 const nombre = document.getElementById("nombre");
 const apellido = document.getElementById("apellido");
 const fecha = document.getElementById("fechaNacimiento");
 const password = document.getElementById("userPassword");
 const repeatPass = document.getElementById("repeatPass");
+const nombUsuario = document.getElementById("username");
+
+const errorCorreo = document.getElementById("errorCorreo");
 const errorNombre = document.getElementById("errorNombre");
 const errorApellido = document.getElementById("errorApellido");
 const errorFecha = document.getElementById("errorFecha");
 const errorPassword = document.getElementById("errorPassword");
 const errorPassRep = document.getElementById("errorPassRep");
+
+function revisarUsuario() {
+  nombUsuario.setCustomValidity(nombUsuario.value.trim() === "" ? "vacio" : "");
+}
+
 function correoValido(valor) {
   const patron = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return patron.test(valor.trim());
@@ -29,7 +39,7 @@ function edadValida(fecha) {
 }
 
 function passwordValido(valor) {
-  const patron = /^(?=.*\d)(?=.*[A-Z]).+$/;
+  const patron = /^(?=.*\d)(?=.*\p{Lu}).+$/u;
   return patron.test(valor);
 }
 
@@ -37,7 +47,7 @@ function revisarCorreo() {
   if (correo.value.trim() === "") {
     errorCorreo.textContent = "El correo es obligatorio.";
     correo.setCustomValidity("vacío");
-  } else if (!correoValido(correo.value)) {
+  } else if (!correoValido(correo.value) || correo.validity.typeMismatch) {
     errorCorreo.textContent = "El formato debe ser nombre@dominio.cl";
     correo.setCustomValidity("formato");
   } else {
@@ -65,7 +75,7 @@ function revisarPassword(campo, error, etiqueta) {
     error.textContent = `La ${etiqueta} debe tener entre 6 y 18 caracteres.`;
     campo.setCustomValidity("rango");
   } else if (!passwordValido(campo.value)) {
-    error.textContent = `La ${etiqueta} debe contener al menos un número y una mayuscula.`;
+    error.textContent = `La ${etiqueta} debe contener al menos un número y una mayúscula.`;
     campo.setCustomValidity("formato");
   } else {
     campo.setCustomValidity("");
@@ -79,10 +89,19 @@ function comparaPass() {
   }
 }
 
+function igualdadPass() {
+  revisarPassword(password, errorPassword, "contraseña");
+  revisarPassword(repeatPass, errorPassRep, "contraseña");
+  comparaPass();
+}
+
 function revisarFecha() {
   if (fecha.value === "") {
     errorFecha.textContent = "La fecha de nacimiento es obligatoria.";
     fecha.setCustomValidity("vacio");
+  } else if (fecha.value.length !== 10 || fecha.value < "1900-01-01") {
+    errorFecha.textContent = "Escribe una fecha de nacimiento válida.";
+    fecha.setCustomValidity("rango");
   } else if (!edadValida(fecha.value)) {
     errorFecha.textContent = "Debes tener al menos 13 años para registrarte.";
     fecha.setCustomValidity("edad");
@@ -91,20 +110,50 @@ function revisarFecha() {
   }
 }
 
+function alertaSuccess() {
+  if (formu.checkValidity()) {
+    const usuario = nombUsuario.value.trim();
+    alerta.scrollIntoView({ block: "center" });
+    formu.reset();
+    alertaTexto.textContent = `El usuario ${usuario} ha sido registrado`;
+    alerta.classList.remove("d-none");
+  } else {
+    alerta.classList.add("d-none");
+    formu.classList.add("was-validated");
+  }
+}
+
+//validaciones en submit de formulario
 formu.addEventListener("submit", function (e) {
+  e.preventDefault();
   revisarCorreo();
   revisarTexto(nombre, errorNombre, "nombre");
   revisarTexto(apellido, errorApellido, "apellido");
   revisarFecha();
-  revisarPassword(password, errorPassword, "contraseña");
-  revisarPassword(repeatPass, errorPassRep, "contraseña");
-  comparaPass();
-  if (!formu.checkValidity()) {
-    e.preventDefault();
-  }
-  formu.classList.add("was-validated");
+  igualdadPass();
+  revisarUsuario();
+
+  alertaSuccess();
 });
 
 formu.addEventListener("reset", function () {
   formu.classList.remove("was-validated");
+  alerta.classList.add("d-none");
+});
+
+//comprobación inputs del form
+correo.addEventListener("input", revisarCorreo);
+nombre.addEventListener("input", () =>
+  revisarTexto(nombre, errorNombre, "nombre"),
+);
+apellido.addEventListener("input", () =>
+  revisarTexto(apellido, errorApellido, "apellido"),
+);
+fecha.addEventListener("input", revisarFecha);
+password.addEventListener("input", igualdadPass);
+repeatPass.addEventListener("input", igualdadPass);
+nombUsuario.addEventListener("input", revisarUsuario);
+
+alerta.querySelector(".btn-close").addEventListener("click", () => {
+  alerta.classList.add("d-none");
 });

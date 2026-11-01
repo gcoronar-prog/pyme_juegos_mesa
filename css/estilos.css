@@ -2,7 +2,7 @@
   --color-principal: #37386f;
   --color-secundario: #f4e7d3da;
   --color-texto: #2d241fd5;
-  --color-acento: #ff5622d5;
+  --color-acento: #c94a24;
   --color-oferta: #2e8b57;
   --color-logo: #09121c;
   --espacio-base: 1rem;
@@ -12,6 +12,17 @@
 
 * {
   box-sizing: border-box;
+}
+
+.btn-primary {
+  --bs-btn-bg: var(--color-acento);
+  --bs-btn-border-color: var(--color-acento);
+  --bs-btn-hover-bg: #a93c1c;
+  --bs-btn-hover-border-color: #e45a30;
+  --bs-btn-active-bg: #c94a24;
+  --bs-btn-active-border-color: #c94a24;
+  --bs-btn-disabled-bg: var(--color-acento);
+  --bs-btn-disabled-border-color: var(--color-acento);
 }
 
 body {
@@ -57,7 +68,7 @@ nav {
   gap: 1rem;
 }
 
-a {
+.boton {
   background-color: var(--color-acento);
   color: white;
   padding: 10px 50px;
@@ -77,18 +88,7 @@ a:hover {
   transform: scale(1.05);
 }
 
-.contenedor {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 2rem;
-  padding: 2rem 0;
-}
-
-.tarjeta {
-  width: 400px;
-  max-width: 100%;
-  margin: 0 auto;
+.card {
   padding: var(--espacio-base);
   border-radius: var(--radio-tarjeta);
   background-color: white;
@@ -97,34 +97,22 @@ a:hover {
   text-align: left;
   animation: aparecer 0.8s ease-out;
   transition: transform var(--duracion) ease;
-}
-
-.tarjeta:hover {
-  transform: translateY(-8px);
-}
-
-.tarjeta img {
-  width: 100%;
-  height: auto;
-  border-radius: 12px;
-}
-
-.contenedor > section {
-  display: flex;
-}
-
-section .tarjeta {
   display: flex;
   flex-direction: column;
 }
 
-section .tarjeta img {
-  margin-top: auto;
+.card:hover {
+  transform: translateY(-8px);
 }
 
-section .tarjeta a {
-  align-self: flex-start;
-  margin-top: 1rem;
+.card-title {
+  min-height: 2.4em;
+}
+
+.card img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
 }
 
 .precio-container {
@@ -177,6 +165,54 @@ header {
 
 #mainRegistro {
   max-width: 720px;
+}
+
+header > nav.navbar {
+  flex-direction: row;
+  justify-content: flex-end;
+  padding: 0.5rem 1rem;
+}
+
+#registroBtn {
+  padding: 0.25rem 1rem;
+  font-size: 0.9rem;
+}
+
+header .nav {
+  justify-content: center;
+  gap: 1rem;
+  width: 100%;
+}
+
+header .nav-link,
+header .nav-link:focus,
+header .nav-link.show {
+  color: white;
+  background-color: var(--color-acento);
+  padding: 10px 50px;
+  border-radius: 5px;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+header .nav-link:hover {
+  color: white;
+  background-color: #e45a30cb;
+}
+
+.dropdown-item:hover {
+  transform: none;
+  background-color: #e45a30cb;
+  color: white;
+}
+
+@media (max-width: 768px) {
+  header .nav-link,
+  header .nav-link:focus,
+  header .nav-link.show {
+    padding: 10px 20px;
+    font-size: 1rem;
+  }
 }
 
 @keyframes aparecer {
