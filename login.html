@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Calabozos Alcaloides</title>
+      <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+        crossorigin="anonymous"
+      />
+      <link rel="stylesheet" href="css/estilos.css" />
+    </head>
+  </head>
+  <body>
+    <header>
+      <nav class="navbar navbar-expand-lg justify-content-end">
+        <a
+          id="registroBtn"
+          class="nav-link btn btn-primary"
+          href="./registros/registro.html"
+          >Registrar</a
+        >
+      </nav>
+      <img
+        class="logo"
+        src="img/escudo-logo2.jpg"
+        alt="Calabozos Alcaloides logo"
+      />
+      <h1>Calabozos Alcaloides</h1>
+      <div class="container">
+        <nav class="navbar navbar-expand-lg">
+          <div class="container-fluid">
+            <ul class="nav">
+              <li class="nav-item">
+                <a class="nav-link btn btn-primary" href="./index.html"
+                  >Inicio</a
+                >
+              </li>
+              <li class="nav-item dropdown">
+                <a
+                  class="nav-link dropdown-toggle"
+                  data-bs-toggle="dropdown"
+                  href="#"
+                  aria-expanded="false"
+                  >Categorias</a
+                >
+                <ul class="dropdown-menu">
+                  <li>
+                    <a class="dropdown-item" href="./categorias/tcg.html"
+                      >Juegos de cartas</a
+                    >
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="./categorias/juegos_rol.html"
+                      >Juegos de rol</a
+                    >
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="./categorias/wargames.html"
+                      >Wargames y estrategia</a
+                    >
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="./categorias/accesorios.html"
+                      >Accesorios</a
+                    >
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+    </header>
+    <main class="container">
+      <h3>Ingrese sus datos para iniciar sesión</h3>
+      <a class="btn btn-primary" href="index.html">Volver al inicio</a>
+      <div
+        class="container border border-dark rounded p-4 my-4"
+        style="max-width: 480px"
+      >
+        <form id="formLogin" class="row g-3 text-start" novalidate>
+          <div class="col-12">
+            <label for="userName" class="form-label">Nombre de usuario</label>
+            <input
+              class="form-control"
+              type="text"
+              name="userName"
+              id="userName"
+              placeholder="Nombre de usuario"
+            />
+          </div>
+          <div class="col-12">
+            <label for="contrasenia" class="form-label">Contraseña</label>
+            <input
+              class="form-control"
+              type="password"
+              name="contrasenia"
+              id="contrasenia"
+              placeholder="Contraseña"
+            />
+          </div>
+          <div class="col-12">
+            <button id="login" type="submit" class="btn btn-primary">
+              Iniciar Sesión
+            </button>
+          </div>
+        </form>
+      </div>
+    </main>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

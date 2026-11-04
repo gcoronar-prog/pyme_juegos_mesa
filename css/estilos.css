@@ -178,6 +178,11 @@ header > nav.navbar {
   font-size: 0.9rem;
 }
 
+#loginBtn {
+  padding: 0.25rem 1rem;
+  font-size: 0.9rem;
+}
+
 header .nav {
   justify-content: center;
   gap: 1rem;
