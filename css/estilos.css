@@ -68,7 +68,7 @@ nav {
   gap: 1rem;
 }
 
-.boton {
+/*.boton {
   background-color: var(--color-acento);
   color: white;
   padding: 10px 50px;
@@ -81,9 +81,9 @@ nav {
   transition:
     background-color var(--duracion) ease,
     transform var(--duracion) ease;
-}
+}*/
 
-a:hover {
+.btn-primary:hover {
   background-color: #e45a30cb;
   transform: scale(1.05);
 }
