@@ -178,7 +178,8 @@ header > nav.navbar {
   font-size: 0.9rem;
 }
 
-#loginBtn {
+#loginBtn,
+#perfilBtn {
   padding: 0.25rem 1rem;
   font-size: 0.9rem;
 }

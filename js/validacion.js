@@ -1,7 +1,3 @@
-const formu = document.getElementById("formRegistro");
-const alerta = document.getElementById("alertaFormu");
-const alertaTexto = document.getElementById("alertaTexto");
-
 const correo = document.getElementById("mail");
 const nombre = document.getElementById("nombre");
 const apellido = document.getElementById("apellido");
@@ -67,6 +63,15 @@ function revisarTexto(campo, error, etiqueta) {
   }
 }
 
+function revisarUsuario() {
+  const valor = nombUsuario.value.trim();
+  const existe = obtenerUsuarios().some((u) => u.usuario === valor);
+  nombUsuario.nextElementSibling.textContent = existe
+    ? "Ese nombre de usuario ya existe."
+    : "Campo requerido";
+  nombUsuario.setCustomValidity(valor === "" || existe ? "invalido" : "");
+}
+
 function revisarPassword(campo, error, etiqueta) {
   if (campo.value.trim() === "") {
     error.textContent = `La ${etiqueta} es obligatoria.`;
@@ -113,6 +118,14 @@ function revisarFecha() {
 function alertaSuccess() {
   if (formu.checkValidity()) {
     const usuario = nombUsuario.value.trim();
+    const usuarios = obtenerUsuarios();
+    usuarios.push({
+      usuario,
+      correo: correo.value.trim(),
+      password: password.value,
+      rol: "cliente",
+    });
+    guardarUsuarios(usuarios);
     alerta.scrollIntoView({ block: "center" });
     formu.reset();
     alertaTexto.textContent = `El usuario ${usuario} ha sido registrado`;

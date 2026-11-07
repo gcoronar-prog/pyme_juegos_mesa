@@ -41,6 +41,20 @@ loginForm.addEventListener("submit", function (e) {
   revisarTexto(userName, errorUser, "El nombre de usuario ");
   revisarPassword(password, errorPass, " contraseña ");
   loginForm.classList.add("was-validated");
+  if (!loginForm.checkValidity()) return;
+
+  const encontrado = obtenerUsuarios().find(
+    (u) => u.usuario === userName.value.trim() && u.password === password.value,
+  );
+  if (!encontrado) {
+    errorPass.textContent = "Usuario o contraseña incorrectos.";
+    return;
+  }
+  sessionStorage.setItem(
+    "sesion",
+    JSON.stringify({ usuario: encontrado.usuario, rol: encontrado.rol }),
+  );
+  location.href = "index.html";
 });
 
 loginForm.addEventListener("input", (e) => {
