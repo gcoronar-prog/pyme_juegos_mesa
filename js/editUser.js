@@ -44,7 +44,7 @@ formEditar.addEventListener("submit", (e) => {
   }
 
   Object.assign(actual, {
-    correo: correo.value.trim(),
+    correo: correo.value.trim().toLowerCase(),
     password: password.value,
     nombre: nombre.value.trim(),
     apellido: apellido.value.trim(),

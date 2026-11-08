@@ -13,10 +13,6 @@ const errorFecha = document.getElementById("errorFecha");
 const errorPassword = document.getElementById("errorPassword");
 const errorPassRep = document.getElementById("errorPassRep");
 
-function revisarUsuario() {
-  nombUsuario.setCustomValidity(nombUsuario.value.trim() === "" ? "vacio" : "");
-}
-
 function correoValido(valor) {
   const patron = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return patron.test(valor.trim());
@@ -39,6 +35,15 @@ function passwordValido(valor) {
   return patron.test(valor);
 }
 
+function correoRepetido(correo) {
+  const registroCorreo = correo.trim().toLowerCase();
+  return obtenerUsuarios().some(
+    (u) =>
+      u.correo.toLowerCase() === registroCorreo &&
+      u.usuario !== sesion?.usuario,
+  );
+}
+
 function revisarCorreo() {
   if (correo.value.trim() === "") {
     errorCorreo.textContent = "El correo es obligatorio.";
@@ -46,6 +51,12 @@ function revisarCorreo() {
   } else if (!correoValido(correo.value) || correo.validity.typeMismatch) {
     errorCorreo.textContent = "El formato debe ser nombre@dominio.cl";
     correo.setCustomValidity("formato");
+  } else if (!correoValido(correo.value) || correo.validity.typeMismatch) {
+    errorCorreo.textContent = "El formato debe ser nombre@dominio.cl";
+    correo.setCustomValidity("formato");
+  } else if (correoRepetido(correo.value)) {
+    errorCorreo.textContent = "Ese correo ya está registrado.";
+    correo.setCustomValidity("repetido");
   } else {
     correo.setCustomValidity("");
   }
@@ -115,45 +126,6 @@ function revisarFecha() {
   }
 }
 
-function alertaSuccess() {
-  if (formu.checkValidity()) {
-    const usuario = nombUsuario.value.trim();
-    const usuarios = obtenerUsuarios();
-    usuarios.push({
-      usuario,
-      correo: correo.value.trim(),
-      password: password.value,
-      rol: "cliente",
-    });
-    guardarUsuarios(usuarios);
-    alerta.scrollIntoView({ block: "center" });
-    formu.reset();
-    alertaTexto.textContent = `El usuario ${usuario} ha sido registrado`;
-    alerta.classList.remove("d-none");
-  } else {
-    alerta.classList.add("d-none");
-    formu.classList.add("was-validated");
-  }
-}
-
-//validaciones en submit de formulario
-formu.addEventListener("submit", function (e) {
-  e.preventDefault();
-  revisarCorreo();
-  revisarTexto(nombre, errorNombre, "nombre");
-  revisarTexto(apellido, errorApellido, "apellido");
-  revisarFecha();
-  igualdadPass();
-  revisarUsuario();
-
-  alertaSuccess();
-});
-
-formu.addEventListener("reset", function () {
-  formu.classList.remove("was-validated");
-  alerta.classList.add("d-none");
-});
-
 //comprobación inputs del form
 correo.addEventListener("input", revisarCorreo);
 nombre.addEventListener("input", () =>
@@ -166,7 +138,3 @@ fecha.addEventListener("input", revisarFecha);
 password.addEventListener("input", igualdadPass);
 repeatPass.addEventListener("input", igualdadPass);
 nombUsuario.addEventListener("input", revisarUsuario);
-
-alerta.querySelector(".btn-close").addEventListener("click", () => {
-  alerta.classList.add("d-none");
-});

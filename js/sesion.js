@@ -1,3 +1,22 @@
+const sesion = obtenerSesion();
+const loginBtn = document.getElementById("loginBtn");
+const registroBtn = document.getElementById("registroBtn");
+
+const base = loginBtn
+  ? loginBtn.getAttribute("href").replace("login.html", "")
+  : "";
+
+const opcionesRol = {
+  admin: [
+    ["Bodega", "administrador/bodega.html"],
+    ["Usuarios", "administrador/edicionUsuarios.html"],
+  ],
+  cliente: [
+    ["Carrito Compras", "cliente/carritoCompra.html"],
+    ["Mis compras", "cliente/historialCompra.html"],
+  ],
+};
+
 function obtenerUsuarios() {
   return (
     JSON.parse(localStorage.getItem("usuarios")) || [
@@ -7,8 +26,27 @@ function obtenerUsuarios() {
         password: "Admin123",
         rol: "admin",
       },
+      {
+        usuario: "cliente",
+        correo: "cliente@calabozos.cl",
+        password: "Cliente123",
+        rol: "cliente",
+      },
     ]
   );
+}
+
+const rolPagina = document.body.dataset.rol;
+if (rolPagina && (!sesion || sesion.rol !== rolPagina)) {
+  location.href = base + "index.html";
+}
+
+function crearBoton(texto, ruta) {
+  const boton = document.createElement("a");
+  boton.className = loginBtn.className;
+  boton.href = base + ruta;
+  boton.textContent = texto;
+  loginBtn.before(boton);
 }
 
 function guardarUsuarios(usuarios) {
@@ -19,10 +57,6 @@ function obtenerSesion() {
   return JSON.parse(sessionStorage.getItem("sesion"));
 }
 
-const sesion = obtenerSesion();
-const loginBtn = document.getElementById("loginBtn");
-const registroBtn = document.getElementById("registroBtn");
-
 if (sesion && loginBtn) {
   loginBtn.textContent = `Cerrar sesión (${sesion.usuario})`;
   loginBtn.addEventListener("click", (e) => {
@@ -31,12 +65,8 @@ if (sesion && loginBtn) {
     location.reload();
   });
   registroBtn.classList.add("d-none");
-  const perfilBtn = document.createElement("a");
-  perfilBtn.id = "perfilBtn";
-  perfilBtn.className = loginBtn.className;
-  perfilBtn.href = loginBtn
-    .getAttribute("href")
-    .replace("login.html", "editUser.html");
-  perfilBtn.textContent = "Mi perfil";
-  loginBtn.before(perfilBtn);
+  (opcionesRol[sesion.rol] || []).forEach(([texto, ruta]) =>
+    crearBoton(texto, ruta),
+  );
+  crearBoton("Mi perfil", "editUser.html");
 }

@@ -1,5 +1,5 @@
 const loginForm = document.getElementById("formLogin");
-const userName = document.getElementById("userName");
+const userMail = document.getElementById("userMail");
 const password = document.getElementById("contrasenia");
 
 const errorUser = document.getElementById("errorUser");
@@ -10,13 +10,21 @@ function passwordValido(valor) {
   return patron.test(valor);
 }
 
-function revisarTexto(campo, error, etiqueta) {
-  if (campo.value.trim() === "") {
-    error.textContent = `${etiqueta} es obligatorio.`;
-    campo.setCustomValidity("vacio");
+function correoValido(valor) {
+  const patron = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return patron.test(valor.trim());
+}
+
+function revisarCorreo() {
+  if (userMail.value.trim() === "") {
+    errorUser.textContent = "El correo es obligatorio.";
+    userMail.setCustomValidity("vacío");
+  } else if (!correoValido(userMail.value) || userMail.validity.typeMismatch) {
+    errorUser.textContent = "El formato debe ser nombre@dominio.cl";
+    userMail.setCustomValidity("formato");
   } else {
-    error.textContent = "";
-    campo.setCustomValidity("");
+    errorUser.textContent = "";
+    userMail.setCustomValidity("");
   }
 }
 
@@ -38,13 +46,15 @@ function revisarPassword(campo, error, etiqueta) {
 
 loginForm.addEventListener("submit", function (e) {
   e.preventDefault();
-  revisarTexto(userName, errorUser, "El nombre de usuario ");
-  revisarPassword(password, errorPass, " contraseña ");
+  revisarCorreo();
+  revisarPassword(password, errorPass, " contraseña");
   loginForm.classList.add("was-validated");
   if (!loginForm.checkValidity()) return;
 
+  const correoUser = userMail.value.trim().toLowerCase();
   const encontrado = obtenerUsuarios().find(
-    (u) => u.usuario === userName.value.trim() && u.password === password.value,
+    (u) =>
+      u.correo.toLowerCase() === correoUser && u.password === password.value,
   );
   if (!encontrado) {
     errorPass.textContent = "Usuario o contraseña incorrectos.";
@@ -58,8 +68,8 @@ loginForm.addEventListener("submit", function (e) {
 });
 
 loginForm.addEventListener("input", (e) => {
-  if (e.target === userName) {
-    revisarTexto(userName, errorUser, "El nombre de usuario");
+  if (e.target === userMail) {
+    revisarCorreo();
   } else if (e.target === password) {
     revisarPassword(password, errorPass, "contraseña");
   }
