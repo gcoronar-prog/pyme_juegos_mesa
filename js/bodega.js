@@ -1,5 +1,6 @@
 const STOCK_MINIMO = 5;
 
+//productos que se agregan al inventario
 const inventarioBase = [
   { nombre: "Booster Pokémon", categoria: "Juegos de cartas", stock: 20 },
   {
@@ -106,6 +107,7 @@ function mostrarBodega() {
     tablaBodega.append(fila);
   });
 
+  //cuando el stock baja se agregan las alertas
   const pocos = inventario.filter((p) => p.stock <= STOCK_MINIMO);
   alertaStock.classList.toggle("d-none", pocos.length === 0);
   alertaStock.innerHTML = `<strong>Atención hay productos con bajo 

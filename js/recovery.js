@@ -3,6 +3,7 @@ const mailRecovery = document.getElementById("mail");
 const errorMail = document.getElementById("errorMail");
 const mensajeRecovery = document.getElementById("mailRecovery");
 
+//revision de mail y comparacion con correos registrados en localstorage
 function revisarMailRecovery() {
   const valor = mailRecovery.value.trim().toLowerCase();
   if (valor === "") {

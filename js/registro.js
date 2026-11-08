@@ -2,6 +2,7 @@ const formu = document.getElementById("formRegistro");
 const alerta = document.getElementById("alertaFormu");
 const alertaTexto = document.getElementById("alertaTexto");
 
+//funcion de alerta para validar usuarios por registrar
 function alertaSuccess() {
   if (formu.checkValidity()) {
     const usuario = nombUsuario.value.trim();
@@ -27,6 +28,7 @@ function alertaSuccess() {
   }
 }
 
+//submit para registrar usuarios
 formu.addEventListener("submit", function (e) {
   e.preventDefault();
   revisarCorreo();
@@ -39,6 +41,7 @@ formu.addEventListener("submit", function (e) {
   alertaSuccess();
 });
 
+//funcion de limpiar formulario
 formu.addEventListener("reset", function () {
   formu.classList.remove("was-validated");
   alerta.classList.add("d-none");
