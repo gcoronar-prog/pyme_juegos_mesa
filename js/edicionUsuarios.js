@@ -19,7 +19,7 @@ function mostrarUsuarios() {
         <td class="nombre"></td>
         <td class="correo"></td>
         <td>
-            <select class="form-select rol>
+            <select class="form-select rol">
                 <option value="cliente">Cliente</option>
                 <option value="admin">Administrador</option>
             </select>

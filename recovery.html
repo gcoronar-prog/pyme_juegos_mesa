@@ -11,7 +11,8 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="../css/estilos.css" />
-    <script src="../js/sesion.js" defer></script>
+    <script src="js/sesion.js" defer></script>
+    <script src="js/recovery.js" defer></script>
   </head>
   <body>
     <header>
@@ -83,14 +84,14 @@
     </header>
     <main class="container">
       <h3>Recuperar Contraseña</h3>
-      <a class="btn btn-primary" href="/index.html">Volver al inicio</a>
+      <a class="btn btn-primary" href="index.html">Volver al inicio</a>
       <div
         class="container border border-dark rounded p-4 my-4"
         style="max-width: 480px"
       >
-        <form class="row g-3 text-start" novalidate>
+        <form id="formRecovery" class="row g-3 text-start" novalidate>
           <div class="col-12">
-            <label for="" class="form-label"
+            <label for="mail" class="form-label"
               >Escriba su dirección de correo electrónico</label
             >
             <input
@@ -100,14 +101,18 @@
               placeholder="Correo electrónico"
               required
             />
-            <div class="col-12">
-              <br />
-              <button class="btn btn-primary" type="submit">
-                Recuperar Contraseña
-              </button>
-            </div>
-            <p class="form-text" id="mailRecovery"></p>
+            <div id="errorMail" class="invalid-feedback"></div>
           </div>
+          <div class="col-12">
+            <button class="btn btn-primary" type="submit">
+              Recuperar Contraseña
+            </button>
+          </div>
+          <div
+            id="mailRecovery"
+            class="alert alert-success d-none"
+            role="status"
+          ></div>
         </form>
       </div>
     </main>

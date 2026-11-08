@@ -23,13 +23,13 @@ function obtenerUsuarios() {
       {
         usuario: "admin",
         correo: "admin@calabozos.cl",
-        password: "Admin123",
+        password: "Admin123!",
         rol: "admin",
       },
       {
         usuario: "cliente",
         correo: "cliente@calabozos.cl",
-        password: "Cliente123",
+        password: "Cliente123!",
         rol: "cliente",
       },
     ]

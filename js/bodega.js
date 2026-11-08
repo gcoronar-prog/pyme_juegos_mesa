@@ -57,6 +57,8 @@ const inventarioBase = [
 
 const tablaBodega = document.getElementById("tablaBodega");
 const alertaStock = document.getElementById("alertaStock");
+const btnGuardarStock = document.getElementById("btnGuardarStock");
+const stockGuardado = document.getElementById("stockGuardado");
 const inventario = obtenerInventario();
 
 function obtenerInventario() {
@@ -101,6 +103,7 @@ function mostrarBodega() {
       stockGuardado.classList.add("d-none");
       mostrarBodega();
     });
+    tablaBodega.append(fila);
   });
 
   const pocos = inventario.filter((p) => p.stock <= STOCK_MINIMO);

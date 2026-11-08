@@ -23,6 +23,10 @@ function textoValido(valor) {
   return patron.test(valor.trim());
 }
 
+function caracterEspecial(valor) {
+  return /[^\p{L}\d\s]/u.test(valor);
+}
+
 function edadValida(fecha) {
   const hoy = new Date();
   const mes = String(hoy.getMonth() + 1).padStart(2, "0");
@@ -48,9 +52,6 @@ function revisarCorreo() {
   if (correo.value.trim() === "") {
     errorCorreo.textContent = "El correo es obligatorio.";
     correo.setCustomValidity("vacío");
-  } else if (!correoValido(correo.value) || correo.validity.typeMismatch) {
-    errorCorreo.textContent = "El formato debe ser nombre@dominio.cl";
-    correo.setCustomValidity("formato");
   } else if (!correoValido(correo.value) || correo.validity.typeMismatch) {
     errorCorreo.textContent = "El formato debe ser nombre@dominio.cl";
     correo.setCustomValidity("formato");
@@ -93,6 +94,9 @@ function revisarPassword(campo, error, etiqueta) {
   } else if (!passwordValido(campo.value)) {
     error.textContent = `La ${etiqueta} debe contener al menos un número y una mayúscula.`;
     campo.setCustomValidity("formato");
+  } else if (!caracterEspecial(campo.value)) {
+    error.textContent = `La ${etiqueta} debe contener al menos un carácter especial (por ejemplo ! @ # $ %).`;
+    campo.setCustomValidity("especial");
   } else {
     campo.setCustomValidity("");
   }
